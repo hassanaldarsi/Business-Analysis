@@ -1,0 +1,42 @@
+(1)
+SELECT Genre.Name,
+count(Track.Composer) as number_of_composer
+FROM Genre
+JOIN Track on Track.GenreId = Genre.GenreId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 5
+
+
+(2)
+SELECT a.Title, max(t.bytes) as max_bytes
+FROM Album a
+JOIN Track t on a.AlbumId = t.AlbumId
+GROUP BY a.Title
+ORDER BY max_bytes DESC
+LIMIT 5 
+
+
+(3)
+SELECT Customer.CustomerId, Customer.FirstName, Invoice.InvoiceId, MAX(Total) as Maximum_Invoice
+FROM Customer JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId 
+GROUP BY InvoiceId
+ORDER BY Maximum_Invoice DESC
+limit 5
+
+(4)
+SELECT Artist.Name,
+COUNT(Genre.Name) AS JazzTracks
+FROM Artist
+JOIN Album
+ON Artist.ArtistId = Album.ArtistId
+JOIN Track
+ON Track.AlbumId = Album.AlbumId
+JOIN Genre
+ON Genre.GenreId = Track.GenreId
+WHERE Genre.Name = "Jazz"
+GROUP BY Artist.Name
+ORDER BY COUNT(Genre.Name) DESC
+Limit 5;
+
+
